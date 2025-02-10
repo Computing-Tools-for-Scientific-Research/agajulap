@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Setup') {
+            steps {
+                sh 'python3 -m venv venv'
+                sh 'source venv/bin/activate && pip install -r requirements.txt'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run tests on a specific function, for example:
+                sh 'source venv/bin/activate && pytest -k test_specific_function --junitxml=results.xml'
+            }
+        }
+    }
+    post {
+        always {
+            junit 'results.xml'
+        }
+    }
+}
