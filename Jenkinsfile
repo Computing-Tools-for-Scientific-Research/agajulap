@@ -8,14 +8,14 @@ pipeline {
         }
         stage('Setup') {
             steps {
-                sh 'python3 -m venv venv'
-                sh 'source venv/bin/activate && pip install -r requirements.txt'
+                sh 'py -m venv venv'
+                sh 'venv\Scripts\activate && pip install -r requirements.txt'
             }
         }
         stage('Test') {
             steps {
                 // Run tests on a specific function, for example:
-                sh 'source venv/bin/activate && pytest -k test_function_to_test --junitxml=results.xml'
+                sh 'venv\Scripts\activate && pytest -k test_function_to_test --junitxml=results.xml'
             }
         }
     }
