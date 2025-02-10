@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Run tests on a specific function, for example:
-                sh 'source venv/bin/activate && pytest -k test_specific_function --junitxml=results.xml'
+                sh 'source venv/bin/activate && pytest -k test_function_to_test --junitxml=results.xml'
             }
         }
     }
